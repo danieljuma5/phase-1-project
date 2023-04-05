@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phase-1-Project</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1 id="first-heading">TVSHOW SCRAPER</h1>
+  <div id="project-display">
+  <div>
+  <img id ="site-logo" src="" alt="">
+</div>
+  <div class="table-container">
+    <div id="search-box">
+      <input type="search" id="site-search" placeholder="Search by name or id">
+      <button id="search-btn">Search</button>
+    </div>
+    <table id="search" class="small-3-row-3-column">
+      <thead>
+        <tr>
+          <th><label><strong>TvShow</strong></label></th>
+          <th><label><strong>Character</label></span></th>
+          <th><label><strong>TMDB/IMDB id</strong></label></th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+            <td><input type="checkbox" name="tv-show" id="tv-show-name"></td>
+            <td><input type="checkbox" name="character" id="character-name"></td>
+            <td><input type="checkbox" name="tmdb-imdb" id="tmdb-imdb-value"></td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="flex-container">
+  <div id="schedule-shows">
+    <h2>Schedule for Today</h2>
+    <ul id="list-scheduled">
+      <li>list items go here</li>
+    </ul>
+    <button id="schedule-button">Schedule</button>
+    <div id="schedule-inputs" style="display: none;">
+      <div style="display: flex; justify-content: center;">
+        <label for="date-input">Date:</label>
+        <input type="date" id="date-input" name="date-input">
+        <label for="region-input">Region:</label>
+        <select name="countries" id="region-input">
+          <option value="US">United States</option>
+          <option value="GB">United Kingdom</option>
+          <option value="CA">Canada</option>
+          <option value="AU">Australia</option>
+          <option value="IE">Ireland</option>
+          <option value="NZ">New Zealand</option>
+        </select>
+      <button id="submit-button">Submit</button>
+      </div>
+    </div>
+  </div>
+<div id="movie-container">
+  <h3>Random Shows in our Database</h3>
+  <div id="image-container">
+    <div class="middle"></div>
+    
+  </div>
+</div>
+  </div>
+</div>
+  <script src="./js/index.js"></script>
+  <script defer src="./js/schedule.js"></script>
+</body>
+</html>
