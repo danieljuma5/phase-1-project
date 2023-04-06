@@ -153,7 +153,13 @@ function tvShowSearchResults(result) {
 }
 
 
-
+searchButton.addEventListener('click', () => {
+  if(tvCheckbox.checked == true) {
+    searchByTvShowName(inputBox.value);
+  }else {
+    searchByCharacterName(inputBox.value)
+  }
+})
 
 
 
