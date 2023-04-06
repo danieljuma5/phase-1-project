@@ -168,3 +168,13 @@ td {
 .image-container:hover .middle {
   opacity: 1;
 }
+
+.flex-container .table-search-results {
+  width: 100%;
+  padding: auto;
+}
+.flex-container .character-search-result {
+  width:100%;
+  display: block;
+  align-items: center;
+}

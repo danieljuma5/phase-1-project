@@ -30,12 +30,13 @@ function addingDisplayMovieCards(result) {
     imageContainer.appendChild(imageCard)
     })
   }
+
 function scheduledTodayShows(country) {
   const requestOptions = {
     method: 'GET',
     redirect: 'follow'
   };
-  
+  //Fetch Scheduled shows by Country
   fetch(`https://api.tvmaze.com/schedule?country=${country}`, requestOptions)
     .then(response => response.json())
     .then(result => renderingTodayScheduledShows(result))
@@ -81,7 +82,7 @@ checkboxes.forEach(function(checkbox) {
   });
 });
 }
-
+//Fetching names from API
 function searchByTvShowName(name)  {
   const requestOptions = {
     method: 'GET',
@@ -124,7 +125,7 @@ function searchByTvShowName(name)  {
       }
   }
 
-
+//Render Search results to the DOM
 function tvShowSearchResults(result) {
   result.forEach(item => {
     const tableSearchResults = document.createElement('table');
@@ -152,7 +153,7 @@ function tvShowSearchResults(result) {
 })
 }
 
-
+//Search Button Event Listener
 searchButton.addEventListener('click', () => {
   if(tvCheckbox.checked == true) {
     searchByTvShowName(inputBox.value);
@@ -174,7 +175,7 @@ searchButton.addEventListener('click', () => {
 
 
 
-
+//DOM Content Loaded Event Listener
 document.addEventListener('DOMContentLoaded', () => {
   tvCheckbox.defaultChecked
   displayMovieCards(1);
