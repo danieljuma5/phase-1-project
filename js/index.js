@@ -89,65 +89,69 @@ function searchByTvShowName(name)  {
   };
   fetch(`https://api.tvmaze.com/search/shows?q=${name}`, requestOptions)
     .then(response => response.json())
-    .then(result => tvShowSearchResults(result.show))
-    .catch(error => console.log(error.message));
-}
+    .then(result => tvShowSearchResults(result))
+    .catch(error => console.log(error.message))
+  }
 
-function searchbyImdbTmdbName(queryParam,queryValue)  {
-  const requestOptions = {
-    method: 'GET',
-    redirect: 'follow'
-  };
-    fetch(`https://api.tvmaze.com/lookup/shows?${queryParam}=${queryValue}`, requestOptions)
+  function searchByCharacterName(name)  {
+    const requestOptions = {
+      method: 'GET',
+      redirect: 'follow'
+    };
+    fetch(`https://api.tvmaze.com/search/people?q=${name}`, requestOptions)
       .then(response => response.json())
-      .then(result => 
-        // Process the data here
-        tvShowSearchResults(result.show))
-      .catch(error => {
-        // Handle any errors here
-        console.error(error);
-        alert('error')
-      });
+      .then(result => characterShowResults(result))
+      .catch(error => console.log(error.message))
+    }
+
+    function characterShowResults(result) {
+      for(item of result) {
+        const tableCharacterResult = document.createElement('table')
+        tableCharacterResult.classList.add('character-search-result')
+        tableCharacterResult.innerHTML = `
+        <h3>Character Information</h3>
+        <table>
+      <tr>
+        <th>${item.person.name}</th>
+        <th>${item.person.country.name}</th>
+      </tr>
+        <td><img src="${item.person.image.medium}"/></td>
+        <td>${item.person.gender}</td>
+    </table>
+        `
+        searchDivContainer.innerHTML = ''
+    searchDivContainer.appendChild(tableCharacterResult);
+      }
   }
 
 
-
-function tvShowSearchResults(results) {
-  results.forEach(result => {
+function tvShowSearchResults(result) {
+  result.forEach(item => {
     const tableSearchResults = document.createElement('table');
     tableSearchResults.classList.add('table-search-results')
     tableSearchResults.innerHTML = `
     <h3>TV Show Information</h3>
     <table>
       <tr>
-        <th>${result.show.name}</th>
-        <th>${result.show.type}</th>
-        <th></th>
+        <th>${item.show.name}</th>
+        <th>${item.show.type}</th>
+        <th>Description: ${item.show.summary}</th>
       </tr>
-        <td>${result.show.image.medium}</td>
-        <td>${result.show.language}</td>
-        <td></td>
+        <td><img src="${item.show.image.medium}"></td>
+        <td>${item.show.language}</td>
+        <td>imdb id: ${item.show.externals.imdb}</td>
       <tr>
-        <td>${result.show.network.name}</td>
-        <td>${result.show.language}</td>
-        <td>${result.show.premiered}</td>
+        <td>Network:${item.show.network.name}</td>
+        <td>Language:${item.show.language}</td>
+        <td>Premiered:${item.show.premiered}</td>
       </tr>
     </table>
     `
-    searchDivContainer.innerHTML.replace(tableSearchResults);
-
-  })
+    searchDivContainer.innerHTML = ''
+    searchDivContainer.appendChild(tableSearchResults);
+})
 }
 
-function checkedCheckboxes(value) {
-  searchButton.addEventListener( 'click',(e) => {
-  if(tvCheckbox.checked == true) {
-    searchByTvShowName(inputBox.value)
-  }else if(characterCheckbox.checkbox == true) {
-    searchByTvShowName(inputBox.value)
-  }
-}
-)}
 
 
 
