@@ -106,28 +106,52 @@ function searchByTvShowName(name)  {
     }
 
     function characterShowResults(result) {
-      for(item of result) {
+      const container = document.createElement("div");
+      result.forEach(item => { 
         const tableCharacterResult = document.createElement('table')
         tableCharacterResult.classList.add('character-search-result')
-        tableCharacterResult.innerHTML = `
-        <h3>Character Information</h3>
-        <table>
-      <tr>
-        <th>${item.person.name}</th>
-        <th>${item.person.country.name}</th>
-      </tr>
-        <td><img src="${item.person.image.medium}"/></td>
-        <td>${item.person.gender}</td>
-    </table>
-        `
-        searchDivContainer.innerHTML = ''
-    searchDivContainer.appendChild(tableCharacterResult);
-      }
+        
+        
+        const tableCaption = document.createElement('caption')
+        tableCaption.textContent = "Character Information"
+
+        const headerRow = document.createElement("tr");
+        const header1 = document.createElement("th");
+        const header2 = document.createElement("th");
+        header1.textContent = item.person.name
+        header2.textContent = item.person.country.name
+        headerRow.appendChild(header1);
+        headerRow.appendChild(header2);
+        tableCharacterResult.appendChild(tableCaption)
+        tableCharacterResult.appendChild(headerRow)
+
+
+        const dataRow = document.createElement("tr");
+        const data1 = document.createElement("td");
+        const tableImage = document.createElement('img')
+        tableImage.src = item.person.image.medium
+        data1.appendChild(tableImage)
+        
+        
+        const data2 = document.createElement("td");
+        data2.textContent = item.person.gender;
+        dataRow.appendChild(data1);
+        dataRow.appendChild(data2);
+        tableCharacterResult.appendChild(dataRow);
+    console.log(tableCharacterResult)
+    searchDivContainer.textContent = ''
+    searchDivContainer.classList.remove('flex-container')
+    searchDivContainer.style.width = "100%"
+  container.appendChild(tableCharacterResult);
+  searchDivContainer.appendChild(container)
+  })
   }
 
 //Render Search results to the DOM
 function tvShowSearchResults(result) {
+  const container = document.createElement("div");
   result.forEach(item => {
+    
     const tableSearchResults = document.createElement('table');
     tableSearchResults.classList.add('table-search-results')
     tableSearchResults.innerHTML = `
@@ -149,7 +173,8 @@ function tvShowSearchResults(result) {
     </table>
     `
     searchDivContainer.innerHTML = ''
-    searchDivContainer.appendChild(tableSearchResults);
+    container.appendChild(tableSearchResults);
+    searchDivContainer.appendChild(container)
 })
 }
 
@@ -162,23 +187,10 @@ searchButton.addEventListener('click', () => {
   }
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 //DOM Content Loaded Event Listener
 document.addEventListener('DOMContentLoaded', () => {
   tvCheckbox.defaultChecked
   displayMovieCards(1);
-  scheduledTodayShows("US");
+  scheduledTodayShows("GB");
   displaySearchInput();
 })
